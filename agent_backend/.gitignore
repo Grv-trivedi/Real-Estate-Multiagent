@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+
+# FastAPI / Uvicorn
+.idea/
+.vscode/
+*.log
+*.db
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Node.js (if you're using any frontend tools)
+node_modules/
+.next/
+
+# Docker files
+*.dockerfile
+docker-compose.yml
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Environment variable file
+.env
