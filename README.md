@@ -1,6 +1,6 @@
-# Real-Estate-Multiagent
+# Real-Estate-Multiagent Chatbot(Image + Text Based)
 
-A Real estate agent bot that can handle user queries.
+A Multi-Agent Real Estate Assistant Chatbot, capable of handling both property issue detection and tenancy-related FAQs.
 
 ## Demo
 
