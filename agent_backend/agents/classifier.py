@@ -7,7 +7,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 async def classify_text_message(user_msg: str, history: list) -> str:
     messages = [
         SystemMessage(
-            content="You are a message classifier. Classify the user's message into one of these categories:\n1: Property Issue (visible problems, maintenance, images)\n2: Tenancy FAQ (rent, landlord rights, contracts)\n3: Unclear (needs clarification). Return ONLY the number."
+            content="You are a message classifier. Your goal is to only Classify the user's message into one of these categories:\n1: Property Issue (visible problems, maintenance, images)\n2: Tenancy FAQ (rent, landlord rights, contracts)\n3: Unclear (needs clarification).Return ONLY the number."
         )
     ]
 
