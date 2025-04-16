@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 type Message = {
   role: "user" | "assistant";
   content: string;
+  image?: string; // base64 or object URL
 };
 
 export default function Chatbot() {
@@ -18,14 +19,27 @@ export default function Chatbot() {
       {
         role: "assistant",
         content:
-          "Hello! I'm your real estate assistant. How can I help you today?",
+          "Hello! I'm Gaurav, your real estate assistant. How can I help you today?",
       },
     ]);
   }, []);
 
   const handleSend = async () => {
     if (!input && !file) return;
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
+    const reader = new FileReader();
+    if (file) {
+      reader.onloadend = () => {
+        const imageUrl = reader.result as string;
+        setMessages((prev) => [
+          ...prev,
+          { role: "user", content: input, image: imageUrl },
+        ]);
+        // then send it to backend
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setMessages((prev) => [...prev, { role: "user", content: input }]);
+    }
 
     const formData = new FormData();
     formData.append("message", input);
@@ -64,6 +78,13 @@ export default function Chatbot() {
                 : "bg-gray-200 text-gray-900 self-start"
             }`}
           >
+            {msg.image && (
+              <img
+                src={msg.image}
+                alt="uploaded"
+                className="max-w-full rounded mb-2"
+              />
+            )}
             {msg.content}
           </div>
         ))}
@@ -74,7 +95,7 @@ export default function Chatbot() {
           type="file"
           accept="image/*"
           onChange={(e) => setFile(e.target.files?.[0] || null)}
-          className="w-32 text-sm"
+          className="w-35 text-sm"
         />
         <input
           type="text"
