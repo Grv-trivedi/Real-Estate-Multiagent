@@ -43,7 +43,25 @@ async def chat(
     history: str = Form(default="[]"),  # JSON stringified array of { role, content }
 ):
     try:
-        return {"response": "This is a test response from gaurav."}
+        parsed_history = json.loads(history)
+        # ROUTING STEP 1: If image is uploaded, go to Agent 1
+        if image:
+            image_bytes = await image.read()
+            image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+            response = await get_issue_detection_response(message, image_b64, parsed_history)
+            return {"response": response}
+
+        # ROUTING STEP 2: Classify the message with conversation context
+        classification = await classify_text_message(message, parsed_history)
+
+        print(f"Classification: {classification}")
+        if classification == "1":
+            response = await get_issue_detection_response(message, image_b64=None, history=parsed_history)
+        elif classification == "2":
+            response = await get_tenancy_faq_response(message, parsed_history)
+        else:
+            response = await get_clarifying_question(message, parsed_history)
+        return {"response": response}
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
