@@ -46,6 +46,8 @@ export default function Chatbot() {
     if (file) formData.append("image", file);
     formData.append("history", JSON.stringify(messages));
 
+    setInput("");
+    setFile(null);
     const res = await fetch("http://localhost:8000/chat", {
       method: "POST",
       body: formData,
@@ -58,8 +60,6 @@ export default function Chatbot() {
       { role: "assistant", content: data.response },
     ]);
 
-    setInput("");
-    setFile(null);
   };
 
   return (
