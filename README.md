@@ -4,7 +4,7 @@ A Real estate agent bot that can handle user queries.
 
 ## Demo
 
-<video controls src="Demo.mp4" title="Title"></video>
+![alt text](latest_demo-ezgif.com-optimize.gif)
 
 ## Architecture Diagram
 
@@ -113,4 +113,4 @@ git clone git@github.com:Grv-trivedi/Real-Estate-Multiagent.git
 fastapi dev main.py
 ```
 
-### 
+###
